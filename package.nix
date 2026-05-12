@@ -34,26 +34,22 @@ php.buildComposerProject2 (finalAttrs: {
 
   passthru.phpPackage = php;
 
-  postInstall = ''
-    # Move files out of the default share/php/lychee structure
-    mv $out/share/php/${finalAttrs.pname}/* $out/
-    rm -rf $out/share
-
+  postInstall = let appDir = "$out/share/php/${finalAttrs.pname}"; in ''
     # Remove writable directories and replace with symlinks to dataDir
-    rm -rf $out/storage
-    ln -s ${dataDir}/storage $out/storage
+    rm -rf ${appDir}/storage
+    ln -s ${dataDir}/storage ${appDir}/storage
 
-    rm -rf $out/bootstrap/cache
-    ln -s ${dataDir}/bootstrap-cache $out/bootstrap/cache
+    rm -rf ${appDir}/bootstrap/cache
+    ln -s ${dataDir}/bootstrap-cache ${appDir}/bootstrap/cache
 
-    rm -rf $out/public/uploads
-    ln -s ${dataDir}/public/uploads $out/public/uploads
+    rm -rf ${appDir}/public/uploads
+    ln -s ${dataDir}/public/uploads ${appDir}/public/uploads
 
-    rm -rf $out/public/dist
-    ln -s ${dataDir}/public/dist $out/public/dist
+    rm -rf ${appDir}/public/dist
+    ln -s ${dataDir}/public/dist ${appDir}/public/dist
 
     # Symlink .env to dataDir
-    ln -s ${dataDir}/.env $out/.env
+    ln -s ${dataDir}/.env ${appDir}/.env
   '';
 
   meta = {

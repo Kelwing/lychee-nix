@@ -8,6 +8,7 @@
 let
   cfg = config.services.lychee;
   pkg = cfg.package.override { inherit (cfg) dataDir; };
+  appDir = "${pkg}/share/php/${pkg.pname}";
   php = pkg.passthru.phpPackage;
 
   envFile = pkgs.writeText "lychee-env" (lib.generators.toKeyValue { } cfg.settings);
@@ -211,7 +212,7 @@ in
         Type = "oneshot";
         User = cfg.user;
         Group = cfg.group;
-        WorkingDirectory = pkg;
+        WorkingDirectory = appDir;
         RemainAfterExit = true;
         PrivateTmp = true;
       };
@@ -225,10 +226,10 @@ in
         ''}
 
         # Run Laravel setup commands
-        php ${pkg}/artisan migrate --force
-        php ${pkg}/artisan config:cache
-        php ${pkg}/artisan route:cache
-        php ${pkg}/artisan view:cache
+        php ${appDir}/artisan migrate --force
+        php ${appDir}/artisan config:cache
+        php ${appDir}/artisan route:cache
+        php ${appDir}/artisan view:cache
       '';
     };
 
@@ -276,7 +277,7 @@ in
       virtualHosts.${cfg.hostName} = lib.mkMerge [
         cfg.nginx
         {
-          root = lib.mkForce "${pkg}/public";
+          root = lib.mkForce "${appDir}/public";
 
           extraConfig = ''
             client_max_body_size ${cfg.maxUploadSize};
