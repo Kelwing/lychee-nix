@@ -16,8 +16,8 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          lychee = pkgs.callPackage ./package.nix { };
-          default = self.packages.${system}.lychee;
+          lycheePhotos = pkgs.callPackage ./package.nix { };
+          default = self.packages.${system}.lycheePhotos;
         });
 
       nixosModules = {
@@ -27,7 +27,7 @@
 
       overlays = {
         default = final: prev: {
-          lychee = self.packages.${final.system}.lychee;
+          lycheePhotos = self.packages.${final.system}.lycheePhotos;
         };
       };
 
@@ -38,7 +38,7 @@
         {
           integration = pkgs.callPackage ./test.nix {
             lycheeModule = self.nixosModules.lychee;
-            lycheePackage = self.packages.${system}.lychee;
+            lycheePackage = self.packages.${system}.lycheePhotos;
           };
         });
     };

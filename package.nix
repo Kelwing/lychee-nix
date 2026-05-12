@@ -19,7 +19,7 @@ let
   };
 in
 php.buildComposerProject2 (finalAttrs: {
-  pname = "lychee";
+  pname = "lycheePhotos";
   version = "7.5.4";
 
   src = fetchzip {
@@ -36,7 +36,7 @@ php.buildComposerProject2 (finalAttrs: {
 
   postInstall = ''
     # Move files out of the default share/php/lychee structure
-    mv $out/share/php/lychee/* $out/
+    mv $out/share/php/${finalAttrs.pname}/* $out/
     rm -rf $out/share
 
     # Remove writable directories and replace with symlinks to dataDir

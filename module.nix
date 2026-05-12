@@ -18,8 +18,8 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.lychee;
-      defaultText = lib.literalExpression "pkgs.lychee";
+      default = pkgs.lycheePhotos;
+      defaultText = lib.literalExpression "pkgs.lycheePhotos";
       description = "The Lychee package to use.";
     };
 

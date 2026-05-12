@@ -18,7 +18,7 @@ pkgs.testers.nixosTest {
 
       nixpkgs.overlays = [
         (_final: _prev: {
-          lychee = lycheePackage;
+          lycheePhotos = lycheePackage;
         })
       ];
 
