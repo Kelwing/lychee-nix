@@ -296,6 +296,12 @@ in
               include ${config.services.nginx.package}/conf/fastcgi_params;
               include ${config.services.nginx.package}/conf/fastcgi.conf;
               fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+
+              # Lychee's auth responses set several cookies (session, CSRF,
+              # remember_me) which exceed the default 4k FastCGI header buffer.
+              fastcgi_buffer_size 32k;
+              fastcgi_buffers 8 16k;
+              fastcgi_busy_buffers_size 32k;
             '';
           };
 
