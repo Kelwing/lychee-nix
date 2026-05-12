@@ -51,7 +51,8 @@ pkgs.testers.nixosTest {
     machine.succeed("test -f /var/lib/lychee/.env")
     machine.succeed("grep -q APP_KEY /var/lib/lychee/.env")
 
-    # Verify Lychee responds
-    machine.wait_until_succeeds("curl -sf http://localhost/ | grep -qi lychee", timeout=30)
+    # Verify Lychee responds. A fresh install redirects to /install/admin,
+    # so follow redirects to reach a page that mentions Lychee.
+    machine.wait_until_succeeds("curl -sfL http://localhost/ | grep -qi lychee", timeout=30)
   '';
 }
