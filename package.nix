@@ -20,14 +20,14 @@ let
 in
 php.buildComposerProject2 (finalAttrs: {
   pname = "lycheePhotos";
-  version = "7.5.4";
+  version = "7.6.0";
 
   src = fetchzip {
     url = "https://github.com/LycheeOrg/Lychee/releases/download/v${finalAttrs.version}/Lychee.zip";
-    hash = "sha256-3fgAWhEx2oRLrIJwWUqI+4SpscrqnduyPlL7ymw3mqM=";
+    hash = "sha256-rhqx2dCHvYWmdqSMS/Qyw1iAf9j5ZcyjvgpeSqwifa4=";
   };
 
-  vendorHash = "sha256-hqW2yVQeNr7eQPZk3C8M2m4cp4fF8gs1WQVlVi3ItRg=";
+  vendorHash = "sha256-erEayw7wPmLpKq701p4O5P1fDD4VVJlPpNGWRPX8aZI=";
 
   composerNoScripts = true;
   composerNoDev = true;

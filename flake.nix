@@ -2,7 +2,7 @@
   description = "Self-hosted photo-management done right";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/26.05";
   };
 
   outputs = { self, nixpkgs }:
